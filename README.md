@@ -1,6 +1,6 @@
 This is an unpolished but otherwise functioning prototype of BREAKOUT developed in Godot 4.3, as part of the 20 games challenge.
 
-![](assets/breakout.GIF)
+![](assets/breakout_opt.gif)
 
 Requirements
 ------------
