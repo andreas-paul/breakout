@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://1msvb5nynq46"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_1wb1p"]
+[ext_resource type="PackedScene" uid="uid://c0h1qyxcvwdn3" path="res://scenes/level.tscn" id="1_71o4r"]
+[ext_resource type="PackedScene" uid="uid://cpgoy4b5l3ctb" path="res://scenes/player.tscn" id="3_arpc7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_omlk1"]
+bg_color = Color(0.0338533, 0.0338533, 0.0338532, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_v8kuv"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_ctsvi"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_uui4k"]
+font_size = 64
+font_color = Color(0.84646, 0.213035, 0.404323, 1)
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("player", "label_score", "label_life", "label_highscore", "lost_screen")]
+script = ExtResource("1_1wb1p")
+player = NodePath("Player")
+label_score = NodePath("ScorePanel/CenterContainer/HBoxContainer/Score")
+label_life = NodePath("ScorePanel/CenterContainer/HBoxContainer/Lifes")
+label_highscore = NodePath("ScorePanel/CenterContainer/HBoxContainer/HighScore")
+lost_screen = NodePath("YouLost")
+
+[node name="Level" parent="." instance=ExtResource("1_71o4r")]
+
+[node name="Player" parent="." instance=ExtResource("3_arpc7")]
+position = Vector2(576, 568)
+
+[node name="ScorePanel" type="PanelContainer" parent="."]
+offset_left = 384.0
+offset_right = 768.0
+offset_bottom = 34.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_omlk1")
+
+[node name="CenterContainer" type="CenterContainer" parent="ScorePanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScorePanel/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 150
+alignment = 1
+
+[node name="HighScore" type="Label" parent="ScorePanel/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "3"
+label_settings = SubResource("LabelSettings_v8kuv")
+
+[node name="Score" type="Label" parent="ScorePanel/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_ctsvi")
+
+[node name="Lifes" type="Label" parent="ScorePanel/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "3"
+label_settings = SubResource("LabelSettings_v8kuv")
+
+[node name="YouLost" type="CenterContainer" parent="."]
+visible = false
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="YouLost"]
+layout_mode = 2
+text = "YOU LOST!"
+label_settings = SubResource("LabelSettings_uui4k")
